@@ -1,6 +1,3 @@
-// Enable load balancing over multiple cores on one machine
-// using Nodes cluster module
-
 // Load environment variables
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
@@ -9,7 +6,8 @@ if (process.env.NODE_ENV !== 'production') {
 const cluster = require('cluster');
 const os = require('os');
 
-
+// Enable load balancing over multiple cores on one machine
+// using Nodes cluster module
 if (cluster.isMaster) {
   console.log(`Firing up a cluster of node workers...`);
   console.log(`Master PID: ${process.pid}`);
@@ -60,6 +58,14 @@ if (cluster.isMaster) {
     // Start the restarting function with the first worker
     restartWorker(0);
   });
+
+  function intervalFunc() {
+  console.log('Cant stop me now!');
+  }
+
+  var tweetsense = require('./modules/tweetsense/tweetsense');
+
+  setInterval(tweetsense, 10000);
 
 } else {
   // The application runs as a worker.
