@@ -1,7 +1,8 @@
 'use strict';
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
-var topicSchema = new mongoose.Schema({
+var topicSchema = new Schema({
   query: {
     type: String,
     required: 'Kindly enter a query for the topic'

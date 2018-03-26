@@ -14,21 +14,21 @@ if (cluster.isMaster) {
 
   // If this cluster is loaded as the master process
   // we fork the server to the number of CPUs available
-  // const cpus = os.cpus().length;
-  // console.log(`Forking for ${cpus} CPUs`);
-  // for (let i = 0; i<cpus; i++) {
-  //   cluster.fork();
-  // }
+  const cpus = os.cpus().length;
+  console.log(`Forking for ${cpus} CPUs`);
+  for (let i = 0; i<cpus; i++) {
+    cluster.fork();
+  }
   cluster.fork();
 
   // Automatically start a new server if one crashes
   // (not manually disconnected or killed by the master process)
-  // cluster.on('exit', (worker, code, signal) => {
-  //   if (code !== 0 && !worker.exitedAfterDisconnect){
-  //     console.log(`Worker ${worker.id} crashed. \nStarting a new server...`);
-  //     cluster.fork();
-  //   }
-  // });
+  cluster.on('exit', (worker, code, signal) => {
+    if (code !== 0 && !worker.exitedAfterDisconnect){
+      console.log(`Worker ${worker.id} crashed. \nStarting a new server...`);
+      cluster.fork();
+    }
+  });
 
   // Allow the user to gracefully restart all workers in sequence. Unix only.
   // Called by $ sudo kill -SIGUSR2 [masterPID]
@@ -59,13 +59,10 @@ if (cluster.isMaster) {
     restartWorker(0);
   });
 
-  function intervalFunc() {
-  console.log('Cant stop me now!');
-  }
 
   var tweetsense = require('./modules/tweetsense/tweetsense');
 
-  setInterval(tweetsense, 10000);
+  setInterval(tweetsense.runForEachTopic, 3600000);
 
 } else {
   // The application runs as a worker.

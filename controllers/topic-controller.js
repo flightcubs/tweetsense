@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose');
 var Topic = require('../models/topic');
+var Tweet = require('../models/tweet');
 
 exports.topic_list = function(req, res) {
   Topic.find({}, function(err, topic) {
@@ -43,5 +44,13 @@ exports.topic_delete = function(req, res) {
     if (err)
       res.send(err);
     res.json({ message: 'Topic successfully deleted' });
+  });
+};
+
+exports.topic_tweets = function(req, res) {
+  Tweet.find({topic: req.params.topicId}, function(err, tweets) {
+    if (err)
+      res.send(err);
+    res.json(tweets);
   });
 };

@@ -4,7 +4,7 @@
   "description": "",
   "main": "cluster.js",
   "scripts": {
-    "start": "nodemon cluster.js",
+    "start": "node cluster.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Filip Hedberg",
