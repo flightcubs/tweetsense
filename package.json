@@ -4,16 +4,20 @@
   "description": "",
   "main": "cluster.js",
   "scripts": {
-    "start": "node cluster.js",
+    "start": "nodemon cluster.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Filip Hedberg",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "mongoose": "^5.0.11",
     "sentiment": "^4.2.0",
     "twitter": "^1.7.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.2"
   }
 }
