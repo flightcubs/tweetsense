@@ -1,16 +1,36 @@
 var sentiment = require('sentiment');
 
 class Tweet {
-  constructor(twitterId, url, text, username, nrOfLikes, nrOfRetweets) {
+  constructor(twitterId, createdAt, text, userName, screenName, nrOfLikes, nrOfRetweets) {
     this.twitterId = twitterId;
-    this.url = url;
+    this.createdAt = createdAt;
     this.text = text;
-    this.username = username;
+    this.userName = userName;
+    this.screenName = screenName;
     this.nrOfLikes = nrOfLikes;
     this.nrOfRetweets = nrOfRetweets;
 
-    sentimentResult = sentiment(text);
-    this.sentiment = sentimentResult['score'];
-
+    this.sentimentResult = sentiment(text);
+    this.sentiment = this.sentimentResult['score'];
   }
+}
+
+module.exports.parseTweetResult = function (result) {
+  rawTweets = result['statuses'];
+  tweets = [];
+
+  Object.entries(rawTweets).forEach(([, value]) => {
+    newTweet = new Tweet(
+        value['id'],
+        value['created_at'],
+        value['full_text'],
+        value['user']['name'],
+        value['user']['screen_name'],
+        value['retweet_count'],
+        value['favorite_count'],
+      );
+    tweets.push(newTweet);
+  });
+
+  return tweets;
 }
