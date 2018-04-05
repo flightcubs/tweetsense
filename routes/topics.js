@@ -20,7 +20,7 @@ router.post('/create', topic_controller.topic_create_post);
 router.get('/:topicId', topic_controller.topic_detail);
 
 // PUT (update) a topic
-router.get('/:topicId', topic_controller.topic_update);
+router.put('/:topicId', topic_controller.topic_update);
 
 // DELETE a topic
 router.delete('/:topicId', topic_controller.topic_delete)
