@@ -11,8 +11,8 @@ var client = new Twitter({
 module.exports.getTweets = async function (query){
   try {
     var q = query;
-    var result_type = 'popular';  // popular, recent or mixed
-    var count = '100';
+    var result_type = 'recent';  // popular, recent or mixed
+    var count = '10';
     var lang = 'en';
     var tweet_mode = 'extended';   // to get full tweet text
     var params = {q: q, result_type: result_type, count: count, lang: lang, tweet_mode: tweet_mode};
