@@ -23,7 +23,7 @@ router.get('/:topicId', topic_controller.topic_detail);
 router.get('/:topicId', topic_controller.topic_update);
 
 // DELETE a topic
-router.get('/:topicId', topic_controller.topic_delete)
+router.delete('/:topicId', topic_controller.topic_delete)
 
 // GET a topic tweets
 router.get('/:topicId/tweets', topic_controller.topic_tweets);
