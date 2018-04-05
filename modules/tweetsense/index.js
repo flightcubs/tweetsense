@@ -20,6 +20,7 @@ async function runForEachTopic() {
     for (let i = 0; i < topicList.length; ++i) {
       let topic = topicList[i];
       tweetList = await tweetsearch.getTweets(topic['query']);
+      console.log(`Fetched ${tweetList.length} tweets for ${topic.query}`)
       for (let j = 0; j < tweetList.length; ++j) {
         let tweet = tweetList[j];
         controller.tweet_create(tweet, topic);
@@ -34,7 +35,14 @@ async function runForEachTopic() {
 if (require.main == module) {
   // If running as script
   console.log('Running as script');
-  runForEachTopic();
+  runForEachTopic()
+    .then( () => {
+      console.log("Tweetsense completed");
+    })
+    .catch( err => {
+      console.log(err);
+    })
+
 } else {
   // Being required
   module.exports.runForEachTopic = runForEachTopic;
