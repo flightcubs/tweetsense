@@ -58,9 +58,7 @@ if (cluster.isMaster) {
     restartWorker(0);
   });
 
-
-  var tweetsense = require('./modules/tweetsense/tweetsense');
-
+  var tweetsense = require('./modules/tweetsense');
   setInterval(tweetsense.runForEachTopic, 3600000);
 
 } else {
