@@ -19,7 +19,6 @@ if (cluster.isMaster) {
   for (let i = 0; i<cpus; i++) {
     cluster.fork();
   }
-  cluster.fork();
 
   // Automatically start a new server if one crashes
   // (not manually disconnected or killed by the master process)
